@@ -15,6 +15,7 @@ import Vuex from 'vuex'
 import VueCookies from 'vue-cookies'
 import axios from 'axios'
 import qs from 'querystring'
+import saveAs from 'file-saver';
 
 Vue.config.productionTip = false;
 
@@ -113,6 +114,23 @@ const store = new Vuex.Store({
                     store.dispatch('getUser').then(() => {
                     });
             });
+        },
+
+        generateCard(store, payload) {
+            var tags = ["Jibiki.app"];
+            var cardText = "";
+            if (payload.type === 1) {
+                if(payload.data.miscellaneous.jlpt != null) {
+                    tags.push("JLPT_N"+payload.data.miscellaneous.jlpt);
+                }
+                var cardText = "tags:"+tags.join(' ')+"\n"
+                +payload.data.literal
+                +"; \"Meanings: "+payload.data.definitions.join(', ')+"\n"
+                +"Readings: \n Onyomi: "+payload.data.readings.onyomi.join(', ')+"\n"
+                +"Kunyomi: "+payload.data.readings.kunyomi.join(', ')+"\"";
+            }
+            var card = new Blob([cardText], {type: "text/plain;charset=utf-8"})
+            saveAs(card, "JibikiCard_"+payload.data.id+".txt")
         },
 
         getToken(store, form) {

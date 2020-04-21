@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.1",
     "core-js": "^2.6.11",
+    "file-saver": "^2.0.2",
     "lodash.debounce": "^4.0.8",
     "sass": "^1.24.4",
     "vue": "^2.6.11",

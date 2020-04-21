@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="md-layout-item md-size-60">
+            <div class="md-layout-item md-size-55">
                 <div class="chips">
                     <md-chip class="md-raised md-primary" v-if="kanji.miscellaneous.radicalName != null">
                         {{kanji.miscellaneous.radicalName}}
@@ -62,6 +62,10 @@
             <div class="md-layout-item md-size-5">
                 <Bookmark :type="1" :id="kanji.id"/>
             </div>
+            
+            <div class="md-layout-item md-size-5">
+                <ExportAnki :type="1" :data="kanji"/>
+            </div>
         </div>
         <md-divider/>
     </md-content>
@@ -69,14 +73,15 @@
 
 <script>
     import Bookmark from "../Bookmark";
+    import ExportAnki from "../ExportAnki";
 
     export default {
         name: "Kanji",
-        components: {Bookmark},
+        components: {Bookmark, ExportAnki},
         props: {
             kanji: Object
         }
-    }
+    }    
 </script>
 
 <style scoped lang="scss">
